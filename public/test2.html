@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+	<title>Hello World, AngularJS - ViralPatel.net</title>
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular-resource.min.js"></script>
+
+</head>
+<body>
+  <div ng-controller="PiWebController">
+    <h2>Pool</h2>
+    <div> {{ poolTemp[0].data1 }} </div>
+
+  </div>
+
+
+  <script type="text/javascript">
+	function PiWebController($scope,$http) {
+	    $scope.poolTemp = '10.0';
+
+    	    $http.get('http://192.168.1.135:3000/pool').
+        	success(function(data) {
+	    		console.log('success', data);
+            		$scope.data = data;
+            		$scope.poolTemp = data;
+		}).error(function(data, status) {
+	    		console.log('error', data, status);
+            		$scope.data = 'error with status code: ' + status;
+        	});
+	}
+  </script>
+	
+</body>
+</html>
+

@@ -22,7 +22,7 @@ var express   =    require("express");
  
          console.log('connected as id ' + connection.threadId);
          
-         connection.query("select data1, data2, created  from payload order by id desc limit 1",function(err,rows){
+         connection.query("select node, data1, data2, created from payload where node ='GARAGE' order by id desc limit 1",function(err,rows){
              connection.release();
              if(!err) {
 		console.log(rows);
@@ -31,11 +31,38 @@ var express   =    require("express");
          });
  
          connection.on('error', function(err) {      
-               res.json({"code" : 100, "status" : "Error in connection database"});
+               res.json({"code" : 100, "status" : "Error in connection database garage"});
                return;     
          });
    });
  }
+
+ function check_pool(req,res) {
+
+     pool.getConnection(function(err,connection){
+         if (err) {
+           connection.release();
+           res.json({"code" : 100, "status" : "Error in connection database"});
+           return;
+         }
+
+         console.log('check pool connected as id ' + connection.threadId);
+
+         connection.query("select node, data1, data2, created  from payload where node = 'POOL' order by id desc limit 1",function(err,rows){
+             connection.release();
+             if(!err) {
+                console.log(rows);
+                 res.json(rows);
+             }
+         });
+
+         connection.on('error', function(err) {
+               res.json({"code" : 100, "status" : "Error in connection database pool"});
+               return;
+         });
+   });
+ }
+
  
 function check_tim(req,res) {
 
@@ -46,13 +73,25 @@ function check_tim(req,res) {
     return;
  }
 
+function check_text(req,res) {
+
+    console.log('check text');
+
+    res.send("89.2");
+
+    return;
+ }
 
  app.get("/",function(req,res){-
-         check_garage(req,res);
+         check_text(req,res);
  });
 
  app.get("/garage",function(req,res){-
          check_garage(req,res);
+ });
+
+ app.get("/pool",function(req,res){-
+         check_pool(req,res);
  });
 
  app.get("/tim",function(req,res){-
@@ -60,3 +99,5 @@ function check_tim(req,res) {
  });
  
  app.listen(3000);
+
+ app.use(express.static('public'));
