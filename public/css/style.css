@@ -1,0 +1,58 @@
+body 
+{    
+    font-family: arial;    
+}
+h2 
+{
+    background-color:#CCC;   
+    border: 1px solid;    
+    color:#39F;
+    margin-top:0px;    
+    text-align: center;    
+}
+h3 
+{
+    background-color:#CCC;   
+    border: 1px solid;    
+    color:black;
+    margin-top:0px;    
+    text-align: center;    
+}
+.sectionModule
+{
+  border-style:ridge;
+  width:30%;
+  padding:10px;
+  background:lightblue;
+  float:left;
+  height:130px;
+  text-align:center;
+}
+.poolModule
+{
+  background:lightblue;
+}
+.garageModuleClosed
+{
+  background:lightcyan;
+}
+.garageModuleOpen
+{
+  background:lightcoral;
+}
+.bleModule
+{
+  background:lightyellow;
+}
+.clear 
+{
+  clear:both;
+}
+.payloadText
+{
+  font-style:italic;
+  font-size:12px;
+  padding-top:10px;
+}
+
+ 

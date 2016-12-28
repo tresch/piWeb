@@ -63,6 +63,32 @@ var express   =    require("express");
    });
  }
 
+ function check_ble(req,res) {
+
+     pool.getConnection(function(err,connection){
+         if (err) {
+           connection.release();
+           res.json({"code" : 100, "status" : "Error in connection database"});
+           return;
+         }
+
+         console.log('check ble connected as id ' + connection.threadId);
+
+         connection.query("select node, data1, data2, created from payload where node like 'BLE%' order by id desc limit 1",function(err,rows){
+             connection.release();
+             if(!err) {
+                console.log(rows);
+                 res.json(rows);
+             }
+         });
+
+         connection.on('error', function(err) {
+               res.json({"code" : 100, "status" : "Error in connection database pool"});
+               return;
+         });
+   });
+ }
+
  
 function check_tim(req,res) {
 
@@ -96,6 +122,10 @@ function check_text(req,res) {
 
  app.get("/tim",function(req,res){-
          check_tim(req,res);
+ });
+
+ app.get("/ble",function(req,res){-
+         check_ble(req,res);
  });
  
  app.listen(3000);
