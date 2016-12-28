@@ -8,25 +8,56 @@
 </head>
 <body>
   <div ng-controller="PiWebController">
-    <h2>Pool</h2>
-    <div> {{ poolTemp[0].data1 }} </div>
 
-  </div>
+    <div style="border-style:ridge;width:33%;padding:10px;background:lightblue">
+      <h2>Pool</h2>
+      <div>Water Temp: {{ poolData[0].data1 }}&deg; F</div>
+      <div>Air Temp: {{ poolData[0].data2 }}&deg; F</div>
+      <div>Last Reading: <span ng-bind="poolData[0].created | date:'MM/dd/yyyy h:mm:ss a'"></span></div>
+    </div>
 
+    <div>
+      <h2>Garage</h2>
+      <div>
+	<div ng-show="garageData[0].data1 < 2">Garage is open</div>
+     	<div ng-show="garageData[0].data1 >= 2 && garageData[0].data1 < 7 ">Garage is closed and not empty</div>
+	<div ng-show="garageData[0].data1 >= 7">Garage is closed and empty</div>
+      </div>
+      <div>Distance: {{ garageData[0].data1 }} ft.</div>
+      <div>Air Temp: {{ garageData[0].data2 }}&deg; F</div>
+      <div>Last Reading: <span ng-bind="garageData[0].created | date:'MM/dd/yyyy h:mm:ss a'"></span></div>
+    </div>
+
+  
 
   <script type="text/javascript">
 	function PiWebController($scope,$http) {
-	    $scope.poolTemp = '10.0';
+
+	    $scope.poolData = '10.0';
 
     	    $http.get('http://192.168.1.135:3000/pool').
         	success(function(data) {
 	    		console.log('success', data);
             		$scope.data = data;
-            		$scope.poolTemp = data;
+            		$scope.poolData = data;
 		}).error(function(data, status) {
 	    		console.log('error', data, status);
             		$scope.data = 'error with status code: ' + status;
         	});
+
+            $scope.garageData = '0.0';
+	    $scope.garageFeet = "0.0";
+
+            $http.get('http://192.168.1.135:3000/garage').
+                success(function(data) {
+                        console.log('success', data);
+                        $scope.data = data;
+                        $scope.garageData = data;
+                }).error(function(data, status) {
+                        console.log('error', data, status);
+                        $scope.data = 'error with status code: ' + status;
+                });
+
 	}
   </script>
 	
