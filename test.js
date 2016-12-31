@@ -6,7 +6,7 @@ var express   =    require("express");
      connectionLimit : 10, //important
      host     : 'localhost',
      user     : 'pi',
-     password : 'changepassword',
+     password : 'piTin',
      database : 'piHub',
      debug    :  false
  });
