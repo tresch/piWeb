@@ -4,7 +4,7 @@ myApp.controller("piWebController", function ($scope,$http) {
 
 	    $scope.poolData = '10.0';
 
-    	    $http.get('http://192.168.1.135:3000/pool').
+    	    $http.get('/pool').
         	success(function(data) {
 	    		console.log('success', data);
             		$scope.data = data;
@@ -16,7 +16,7 @@ myApp.controller("piWebController", function ($scope,$http) {
 
             $scope.garageData = '0.0';
 
-            $http.get('http://192.168.1.135:3000/garage').
+            $http.get('/garage').
                 success(function(data) {
                         console.log('success', data);
                         $scope.data = data;
@@ -28,7 +28,7 @@ myApp.controller("piWebController", function ($scope,$http) {
 
             $scope.garageData = '0.0';
 
-            $http.get('http://192.168.1.135:3000/garage').
+            $http.get('/garage').
                 success(function(data) {
                         console.log('success', data);
                         $scope.data = data;
@@ -40,7 +40,7 @@ myApp.controller("piWebController", function ($scope,$http) {
 
             $scope.bleData = '0.0';
 
-            $http.get('http://192.168.1.135:3000/ble').
+            $http.get('/ble').
                 success(function(data) {
                         console.log('success', data);
                         $scope.data = data;
