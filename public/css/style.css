@@ -6,7 +6,7 @@ h2
 {
     background-color:#CCC;   
     border: 1px solid;    
-    color:#39F;
+    color:navy;
     margin-top:0px;    
     text-align: center;    
 }
@@ -27,6 +27,7 @@ h3
   float:left;
   height:130px;
   text-align:center;
+  margin:2px;
 }
 .poolModule
 {
