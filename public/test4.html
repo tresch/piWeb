@@ -10,14 +10,20 @@
 <body ng-cloak>
   <div>
 
-    <div class="sectionModule poolModule" ng-controller="poolController">
+    <div class="sectionModule poolModule" ng-controller="poolController" ng-cloak>
       <h2>Pool</h2>
       <div>Pool: {{ poolData[0].data1 }}&deg; F</div>
       <div>Air: {{ poolData[0].data2 }}&deg; F</div>
       <div class="payloadText">Last: <span ng-bind="poolData[0].created | date:'MM/dd/yyyy h:mm:ss a'"></span></div>
     </div>
 
-    <div class="sectionModule garageModuleOpen" ng-controller="garageController">
+    <div class="sectionModule tvRoomModule" ng-controller="tvRoomController" ng-cloak>
+      <h2>TV Room</h2>
+      <div>Temp: {{ tvRoomData[0].data1 }}&deg; F</div>
+      <div class="payloadText">Last: <span ng-bind="tvRoomData[0].created | date:'MM/dd/yyyy h:mm:ss a'"></span></div>
+    </div>
+
+    <div class="sectionModule garageModuleOpen" ng-controller="garageController" ng-cloak>
       <h2>Garage</h2>
       <div>
 	<div ng-show="garageData[0].data1 < 2">Open</div>
@@ -29,7 +35,7 @@
       <div class="payloadText">Last: <span ng-bind="garageData[0].created | date:'MM/dd/yyyy h:mm:ss a'"></span></div>
     </div>
 
-    <div class="sectionModule bleModule" ng-controller="bleController">
+    <div class="sectionModule bleModule" ng-controller="bleController" ng-cloak>
       <h2>Where is Dotty</h2>
       <div>
         <div ng-show="bleData[0].data1 > 30">Unknown</div>

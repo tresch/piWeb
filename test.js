@@ -31,7 +31,7 @@ var express   =    require("express");
          });
  
          connection.on('error', function(err) {      
-               res.json({"code" : 100, "status" : "Error in connection database garage"});
+               //res.json({"code" : 100, "status" : "Error in connection database garage"});
                return;     
          });
    });
@@ -57,11 +57,38 @@ var express   =    require("express");
          });
 
          connection.on('error', function(err) {
-               res.json({"code" : 100, "status" : "Error in connection database pool"});
+               //res.json({"code" : 100, "status" : "Error in connection database pool"});
                return;
          });
    });
  }
+
+ function check_tvroom(req,res) {
+
+     pool.getConnection(function(err,connection){
+         if (err) {
+           connection.release();
+           res.json({"code" : 100, "status" : "Error in connection database"});
+           return;
+         }
+
+         console.log('check tvroom connected as id ' + connection.threadId);
+
+         connection.query("select node, data1, data2, created  from payload where node = 'TVROOM' order by id desc limit 1",function(err,rows){
+             connection.release();
+             if(!err) {
+                console.log(rows);
+                 res.json(rows);
+             }
+         });
+
+         connection.on('error', function(err) {
+               //res.json({"code" : 100, "status" : "Error in connection database pool"});
+               return;
+         });
+   });
+ }
+
 
  function check_ble(req,res) {
 
@@ -83,7 +110,7 @@ var express   =    require("express");
          });
 
          connection.on('error', function(err) {
-               res.json({"code" : 100, "status" : "Error in connection database pool"});
+               //res.json({"code" : 100, "status" : "Error in connection database pool"});
                return;
          });
    });
@@ -118,6 +145,10 @@ function check_text(req,res) {
 
  app.get("/pool",function(req,res){-
          check_pool(req,res);
+ });
+
+ app.get("/tvroom",function(req,res){-
+         check_tvroom(req,res);
  });
 
  app.get("/tim",function(req,res){-

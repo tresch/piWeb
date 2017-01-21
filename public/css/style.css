@@ -21,7 +21,7 @@ h3
 .sectionModule
 {
   border-style:ridge;
-  width:30%;
+  width:46%;
   padding:10px;
   background:lightblue;
   float:left;
@@ -32,6 +32,10 @@ h3
 .poolModule
 {
   background:lightblue;
+}
+.tvRoomModule
+{
+  background:darkseagreen;
 }
 .garageModuleClosed
 {

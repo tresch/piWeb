@@ -15,6 +15,22 @@ myApp.controller("poolController", function ($scope,$http) {
         	});
 });
 
+myApp.controller("tvRoomController", function ($scope,$http) {
+
+            $scope.tvRoomData = '10.0';
+
+            $http.get('/tvroom').
+                success(function(data) {
+                        console.log('success', data);
+                        $scope.data = data;
+                        $scope.tvRoomData = data;
+                }).error(function(data, status) {
+                        console.log('error', data, status);
+                        $scope.data = 'error with status code: ' + status;
+                });
+});
+
+
 myApp.controller("garageController", function ($scope,$http) {
 
             $scope.garageData = '0.0';
