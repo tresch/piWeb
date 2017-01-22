@@ -2,8 +2,8 @@
 <html ng-app="myApp">
 <head>
 	<title>PiWeb</title>
-	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular-resource.min.js"></script>
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular-resource.min.js"></script>
 	<script src="js/test4.js"></script>
         <link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
@@ -12,39 +12,39 @@
 
     <div class="sectionModule poolModule" ng-controller="poolController" ng-cloak>
       <h2>Pool</h2>
-      <div>Pool: {{ poolData[0].data1 }}&deg; F</div>
-      <div>Air: {{ poolData[0].data2 }}&deg; F</div>
+      <div class="moduleData">Pool: {{ poolData[0].data1 }}&deg; F</div>
+      <div class="moduleData">Air: {{ poolData[0].data2 }}&deg; F</div>
       <div class="payloadText">Last: <span ng-bind="poolData[0].created | date:'MM/dd/yyyy h:mm:ss a'"></span></div>
     </div>
 
     <div class="sectionModule tvRoomModule" ng-controller="tvRoomController" ng-cloak>
       <h2>TV Room</h2>
-      <div>Temp: {{ tvRoomData[0].data1 }}&deg; F</div>
+      <div class="moduleData">Temp: {{ tvRoomData[0].data1 }}&deg; F</div>
       <div class="payloadText">Last: <span ng-bind="tvRoomData[0].created | date:'MM/dd/yyyy h:mm:ss a'"></span></div>
     </div>
 
-    <div class="sectionModule garageModuleOpen" ng-controller="garageController" ng-cloak>
+    <div ng-class="{sectionModule:1,garageModuleOpen:garageData[0].data1 < 2,garageModuleClosed:garageData[0].data1 >= 2}" ng-controller="garageController" ng-cloak>
       <h2>Garage</h2>
       <div>
-	<div ng-show="garageData[0].data1 < 2">Open</div>
-     	<div ng-show="garageData[0].data1 >= 2 && garageData[0].data1 < 7 ">Closed and not empty</div>
-	<div ng-show="garageData[0].data1 >= 7">Closed and empty</div>
+	<div class="moduleMessage" ng-show="garageData[0].data1 < 2">Open</div>
+     	<div class="moduleMessage" ng-show="garageData[0].data1 >= 2 && garageData[0].data1 < 7 ">Closed and not empty</div>
+	<div class="moduleMessage" ng-show="garageData[0].data1 >= 7">Closed and empty</div>
       </div>
-      <div>Feet: {{ garageData[0].data1 }}</div>
-      <div>Temp: {{ garageData[0].data2 }}&deg; F</div>
+      <div class="moduleData">Feet: {{ garageData[0].data1 }}</div>
+      <div class="moduleData">Temp: {{ garageData[0].data2 }}&deg; F</div>
       <div class="payloadText">Last: <span ng-bind="garageData[0].created | date:'MM/dd/yyyy h:mm:ss a'"></span></div>
     </div>
 
     <div class="sectionModule bleModule" ng-controller="bleController" ng-cloak>
-      <h2>Where is Dotty</h2>
+      <h2>Where is Dotty?</h2>
       <div>
-        <div ng-show="bleData[0].data1 > 30">Unknown</div>
-        <div ng-show="bleData[0].node == 'BLE1' && bleData[0].data1 < 30">Julia's bed</div>
-        <div ng-show="bleData[0].node == 'BLE2' && bleData[0].data1 < 30">Dotty's bed</div>
-        <div ng-show="bleData[0].node == 'BLE3' && bleData[0].data1 < 30">Living room</div>
+        <div class="moduleMessage" ng-show="bleData[0].data1 > 30">Unknown</div>
+        <div class="moduleMessage" ng-show="bleData[0].node == 'BLE1' && bleData[0].data1 < 30">Julia's bed</div>
+        <div class="moduleMessage" ng-show="bleData[0].node == 'BLE2' && bleData[0].data1 < 30">Dotty's bed</div>
+        <div class="moduleMessage" ng-show="bleData[0].node == 'BLE3' && bleData[0].data1 < 30">Living room</div>
       </div>
-      <div>Node: {{ bleData[0].node }}</div>
-      <div>Feet: {{ bleData[0].data1 }}</div>
+      <div class="moduleData">Node: {{ bleData[0].node }}</div>
+      <div class="moduleData">Feet: {{ bleData[0].data1 }}</div>
       <div class="payloadText">Last: <span ng-bind="bleData[0].created | date:'MM/dd/yyyy h:mm:ss a'"></span></div>
     </div>
   

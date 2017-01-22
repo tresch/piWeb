@@ -1,9 +1,12 @@
 var myApp = angular.module('myApp', []);
 
-myApp.controller("poolController", function ($scope,$http) {
+var intervalLength = 10000;
+
+myApp.controller("poolController", function ($scope,$http,$interval) {
 
 	    $scope.poolData = '10.0';
 
+	    $poolTimer = $interval(function() {
     	    $http.get('/pool').
         	success(function(data) {
 	    		console.log('success', data);
@@ -13,12 +16,14 @@ myApp.controller("poolController", function ($scope,$http) {
 	    		console.log('error', data, status);
             		$scope.data = 'error with status code: ' + status;
         	});
+	    },intervalLength);
 });
 
-myApp.controller("tvRoomController", function ($scope,$http) {
+myApp.controller("tvRoomController", function ($scope,$http,$interval) {
 
             $scope.tvRoomData = '10.0';
 
+            $tvRoomTimer = $interval(function() {
             $http.get('/tvroom').
                 success(function(data) {
                         console.log('success', data);
@@ -28,13 +33,15 @@ myApp.controller("tvRoomController", function ($scope,$http) {
                         console.log('error', data, status);
                         $scope.data = 'error with status code: ' + status;
                 });
+            },intervalLength);
 });
 
 
-myApp.controller("garageController", function ($scope,$http) {
+myApp.controller("garageController", function ($scope,$http,$interval) {
 
             $scope.garageData = '0.0';
 
+            $garageTimer = $interval(function() {
             $http.get('/garage').
                 success(function(data) {
                         console.log('success', data);
@@ -44,12 +51,14 @@ myApp.controller("garageController", function ($scope,$http) {
                         console.log('error', data, status);
                         $scope.data = 'error with status code: ' + status;
                 });
+            },intervalLength);
 });
 
-myApp.controller("bleController", function ($scope,$http) {
+myApp.controller("bleController", function ($scope,$http,$interval) {
 
             $scope.bleData = '0.0';
 
+            $bleTimer = $interval(function() {
             $http.get('/ble').
                 success(function(data) {
                         console.log('success', data);
@@ -60,5 +69,6 @@ myApp.controller("bleController", function ($scope,$http) {
                         $scope.data = 'error with status code: ' + status;
                 });
 
-	});
+            },intervalLength);
+});
 

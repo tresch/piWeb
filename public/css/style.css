@@ -25,7 +25,7 @@ h3
   padding:10px;
   background:lightblue;
   float:left;
-  height:130px;
+  height:165px;
   text-align:center;
   margin:2px;
 }
@@ -43,7 +43,7 @@ h3
 }
 .garageModuleOpen
 {
-  background:lightcoral;
+  background:firebrick;
 }
 .bleModule
 {
@@ -61,5 +61,28 @@ h3
 }
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
+}
+.moduleMessage{
+    font-size:24px;
+    font-weight:bold;
+    background-color:#FFF;   
+    border: 1px solid;    
+    color:black;
+    margin:auto;
+    margin-top:5px;    
+    text-align: center;
+    width:75%;
+}
+
+.moduleData{
+    font-size:18px;
+    font-weight:bold;
+    background-color:#DDD;   
+    border: 1px solid;    
+    color:black;
+    margin:auto;
+    margin-top:5px;    
+    text-align: center;  
+    width:50%;
 }
  
