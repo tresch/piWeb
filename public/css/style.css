@@ -35,6 +35,10 @@ h3
 }
 .tvRoomModule
 {
+  background:yellow;
+}
+.livingRoomModule
+{
   background:darkseagreen;
 }
 .garageModuleClosed

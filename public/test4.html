@@ -23,6 +23,12 @@
       <div class="payloadText">Last: <span ng-bind="tvRoomData[0].created | date:'MM/dd/yyyy h:mm:ss a'"></span></div>
     </div>
 
+    <div class="sectionModule livingRoomModule" ng-controller="livingRoomController" ng-cloak>
+      <h2>Living Room</h2>
+      <div class="moduleData">Temp: {{ livingRoomData[0].data1 }}&deg; F</div>
+      <div class="payloadText">Last: <span ng-bind="livingRoomData[0].created | date:'MM/dd/yyyy h:mm:ss a'"></span></div>
+    </div>
+
     <div ng-class="{sectionModule:1,garageModuleOpen:garageData[0].data1 < 2,garageModuleClosed:garageData[0].data1 >= 2}" ng-controller="garageController" ng-cloak>
       <h2>Garage</h2>
       <div>

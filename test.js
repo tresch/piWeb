@@ -89,6 +89,31 @@ var express   =    require("express");
    });
  }
 
+ function check_livingroom(req,res) {
+
+     pool.getConnection(function(err,connection){
+         if (err) {
+           connection.release();
+           res.json({"code" : 100, "status" : "Error in connection database"});
+           return;
+         }
+
+         console.log('check living room connected as id ' + connection.threadId);
+
+         connection.query("select node, data1, data2, created  from payload where node = 'LIVING' order by id desc limit 1",function(err,rows){
+             connection.release();
+             if(!err) {
+                console.log(rows);
+                 res.json(rows);
+             }
+         });
+
+         connection.on('error', function(err) {
+               //res.json({"code" : 100, "status" : "Error in connection database pool"});
+               return;
+         });
+   });
+ }
 
  function check_ble(req,res) {
 
@@ -149,6 +174,10 @@ function check_text(req,res) {
 
  app.get("/tvroom",function(req,res){-
          check_tvroom(req,res);
+ });
+
+ app.get("/livingroom",function(req,res){-
+         check_livingroom(req,res);
  });
 
  app.get("/tim",function(req,res){-

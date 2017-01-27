@@ -56,6 +56,33 @@ myApp.controller("tvRoomController", function ($scope,$http,$interval) {
             },intervalLength);
 });
 
+myApp.controller("livingRoomController", function ($scope,$http,$interval) {
+
+            $scope.livingRoomData = '10.0';
+
+            $http.get('/livingroom').
+                success(function(data) {
+                        console.log('success', data);
+                        $scope.data = data;
+                        $scope.livingRoomData = data;
+                }).error(function(data, status) {
+                        console.log('error', data, status);
+                        $scope.data = 'error with status code: ' + status;
+                });
+
+            $livingRoomTimer = $interval(function() {
+            $http.get('/livingroom').
+                success(function(data) {
+                        console.log('success', data);
+                        $scope.data = data;
+                        $scope.livingRoomData = data;
+                }).error(function(data, status) {
+                        console.log('error', data, status);
+                        $scope.data = 'error with status code: ' + status;
+                });
+            },intervalLength);
+});
+
 
 myApp.controller("garageController", function ($scope,$http,$interval) {
 
