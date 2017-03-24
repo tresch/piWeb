@@ -139,3 +139,57 @@ myApp.controller("bleController", function ($scope,$http,$interval) {
             },intervalLength);
 });
 
+myApp.controller("washerController", function ($scope,$http,$interval) {
+
+    $scope.washerData = '10.0';
+
+    $http.get('/washer').
+	success(function(data) {
+	    console.log('success', data);
+	    $scope.data = data;
+	    $scope.washerData = data;
+	}).error(function(data, status) {
+	    console.log('error', data, status);
+	    $scope.data = 'error with status code: ' + status;
+	});
+
+    $washerTimer = $interval(function() {
+	$http.get('/washer').
+	    success(function(data) {
+		console.log('success', data);
+		$scope.data = data;
+		$scope.washerData = data;
+	    }).error(function(data, status) {
+		console.log('error', data, status);
+		$scope.data = 'error with status code: ' + status;
+	    });
+    },intervalLength);
+});
+
+myApp.controller("dryerController", function ($scope,$http,$interval) {
+
+    $scope.dryerData = '10.0';
+
+    $http.get('/dryer').
+	success(function(data) {
+	    console.log('success', data);
+	    $scope.data = data;
+	    $scope.dryerData = data;
+	}).error(function(data, status) {
+	    console.log('error', data, status);
+	    $scope.data = 'error with status code: ' + status;
+	});
+
+    $dryerTimer = $interval(function() {
+	$http.get('/dryer').
+	    success(function(data) {
+		console.log('success', data);
+		$scope.data = data;
+		$scope.dryerData = data;
+	    }).error(function(data, status) {
+		console.log('error', data, status);
+		$scope.data = 'error with status code: ' + status;
+	    });
+    },intervalLength);
+});
+

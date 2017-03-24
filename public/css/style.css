@@ -37,6 +37,14 @@ h3
 {
   background:yellow;
 }
+.washerModule
+{
+    background:orange;
+}
+.dryerModule
+{
+    background:orangered;
+}
 .livingRoomModule
 {
   background:darkseagreen;

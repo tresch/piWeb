@@ -2,9 +2,11 @@
 <html ng-app="myApp">
 <head>
 	<title>PiWeb</title>
-	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular-resource.min.js"></script>
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-resource.min.js"></script>
 	<script src="js/test4.js"></script>
+	<script src="js/node_modules/chart.js/dist/Chart.min.js"></script>
+	<script src="js/node_modules/angular-chart.js/dist/angular-chart.min.js"></script>
         <link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
 <body ng-cloak>
@@ -41,19 +43,31 @@
       <div class="payloadText">Last: <span ng-bind="garageData[0].created | date:'MM/dd/yyyy h:mm:ss a'"></span></div>
     </div>
 
+    <div class="sectionModule washerModule" ng-controller="washerController" ng-cloak>
+      <h2>Washer</h2>
+      <div class="payloadText">Last: <span ng-bind="washerData[0].created | date:'MM/dd/yyyy h:mm:ss a'"></span></div>
+    </div>
+
+    <div class="sectionModule dryerModule" ng-controller="dryerController" ng-cloak>
+      <h2>Dryer</h2>
+      <div class="payloadText">Last: <span ng-bind="dryerData[0].created | date:'MM/dd/yyyy h:mm:ss a'"></span></div>
+    </div>
+
     <div class="sectionModule bleModule" ng-controller="bleController" ng-cloak>
       <h2>Where is Dotty?</h2>
       <div>
-        <div class="moduleMessage" ng-show="bleData[0].data1 > 30">Unknown</div>
-        <div class="moduleMessage" ng-show="bleData[0].node == 'BLE1' && bleData[0].data1 < 30">Julia's bed</div>
-        <div class="moduleMessage" ng-show="bleData[0].node == 'BLE2' && bleData[0].data1 < 30">Dotty's bed</div>
-        <div class="moduleMessage" ng-show="bleData[0].node == 'BLE3' && bleData[0].data1 < 30">Living room</div>
+	<div class="moduleMessage" ng-show="bleData[0].data1 > 30">Unknown</div>
+	<div class="moduleMessage" ng-show="bleData[0].node == 'BLE1' && bleData[0].data1 < 30">Julia's bed</div>
+	<div class="moduleMessage" ng-show="bleData[0].node == 'BLE2' && bleData[0].data1 < 30">Dotty's bed</div>
+	<div class="moduleMessage" ng-show="bleData[0].node == 'BLE3' && bleData[0].data1 < 30">Living room</div>
       </div>
       <div class="moduleData">Node: {{ bleData[0].node }}</div>
       <div class="moduleData">Feet: {{ bleData[0].data1 }}</div>
       <div class="payloadText">Last: <span ng-bind="bleData[0].created | date:'MM/dd/yyyy h:mm:ss a'"></span></div>
     </div>
-  
+
+    
+    
 </body>
 </html>
 

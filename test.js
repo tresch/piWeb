@@ -141,6 +141,59 @@ var express   =    require("express");
    });
  }
 
+function check_washer(req,res) {
+
+    pool.getConnection(function(err,connection){
+	if (err) {
+	    connection.release();
+	    res.json({"code" : 100, "status" : "Error in connection database"});
+	    return;
+	}
+
+	console.log('check washer connected as id ' + connection.threadId);
+
+	connection.query("select node, data1, data2, created  from payload where node = 'LAUNDRY' and data1 > 0 order by id desc limit 1",function(err,rows){
+	    connection.release();
+	    if(!err) {
+		console.log(rows);
+		res.json(rows);
+	    }
+	});
+
+	connection.on('error', function(err) {
+	    //res.json({"code" : 100, "status" : "Error in connection database pool"});
+	    return;
+	});
+    });
+}
+
+function check_dryer(req,res) {
+
+    pool.getConnection(function(err,connection){
+	if (err) {
+	    connection.release();
+	    res.json({"code" : 100, "status" : "Error in connection database"});
+	    return;
+	}
+
+	console.log('check dryer connected as id ' + connection.threadId);
+
+	connection.query("select node, data1, data2, created  from payload where node = 'LAUNDRY' and data2 > 0 order by id desc limit 1",function(err,rows){
+	    connection.release();
+	    if(!err) {
+		console.log(rows);
+		res.json(rows);
+	    }
+	});
+
+	connection.on('error', function(err) {
+	    //res.json({"code" : 100, "status" : "Error in connection database pool"});
+	    return;
+	});
+    });
+}
+
+
  
 function check_tim(req,res) {
 
@@ -180,7 +233,15 @@ function check_text(req,res) {
          check_livingroom(req,res);
  });
 
- app.get("/tim",function(req,res){-
+app.get("/washer",function(req,res){-
+	check_washer(req,res);
+ });
+
+app.get("/dryer",function(req,res){-
+	check_dryer(req,res);
+ });
+
+app.get("/tim",function(req,res){-
          check_tim(req,res);
  });
 
