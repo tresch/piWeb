@@ -14,20 +14,20 @@
 
     <div class="sectionModule poolModule" ng-controller="poolController" ng-cloak>
       <h2>Pool</h2>
-      <div class="moduleData">Pool: {{ poolData[0].data1 }}&deg; F</div>
-      <div class="moduleData">Air: {{ poolData[0].data2 }}&deg; F</div>
+      <div class="moduleData">Pool: {{ poolData[0].data1 | number:0 }}&deg; F</div>
+      <div class="moduleData">Air: {{ poolData[0].data2 | number:0 }}&deg; F</div>
       <div class="payloadText">Last: <span ng-bind="poolData[0].created | date:'MM/dd/yyyy h:mm:ss a'"></span></div>
     </div>
 
     <div class="sectionModule tvRoomModule" ng-controller="tvRoomController" ng-cloak>
       <h2>TV Room</h2>
-      <div class="moduleData">Temp: {{ tvRoomData[0].data1 }}&deg; F</div>
+      <div class="moduleData">Temp: {{ tvRoomData[0].data1 | number:0 }}&deg; F</div>
       <div class="payloadText">Last: <span ng-bind="tvRoomData[0].created | date:'MM/dd/yyyy h:mm:ss a'"></span></div>
     </div>
 
     <div class="sectionModule livingRoomModule" ng-controller="livingRoomController" ng-cloak>
       <h2>Living Room</h2>
-      <div class="moduleData">Temp: {{ livingRoomData[0].data1 }}&deg; F</div>
+      <div class="moduleData">Temp: {{ livingRoomData[0].data1 | number:0 }}&deg; F</div>
       <div class="payloadText">Last: <span ng-bind="livingRoomData[0].created | date:'MM/dd/yyyy h:mm:ss a'"></span></div>
     </div>
 
@@ -39,7 +39,7 @@
 	<div class="moduleMessage" ng-show="garageData[0].data1 >= 7">Closed and empty</div>
       </div>
       <div class="moduleData">Feet: {{ garageData[0].data1 }}</div>
-      <div class="moduleData">Temp: {{ garageData[0].data2 }}&deg; F</div>
+      <div class="moduleData">Temp: {{ garageData[0].data2 | number:0 }}&deg; F</div>
       <div class="payloadText">Last: <span ng-bind="garageData[0].created | date:'MM/dd/yyyy h:mm:ss a'"></span></div>
     </div>
 
